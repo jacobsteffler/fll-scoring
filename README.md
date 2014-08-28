@@ -15,5 +15,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 # Open source licenses
-The Roboto font family is included under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+The Roboto font family is used under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 The font, created by Christian Robinson, is available at: http://www.google.com/fonts/specimen/Roboto.
