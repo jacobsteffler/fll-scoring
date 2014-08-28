@@ -8,6 +8,8 @@ public class Client implements Runnable {
 	//GUI element declarations
 	private JFrame frame;
 	private Container cp;
+	private JPanel topPanel;
+	private JLabel clock;
 
 	public void run() {
 		frame = new JFrame("Scores");
@@ -17,6 +19,15 @@ public class Client implements Runnable {
 		cp = frame.getContentPane();
 		cp.setLayout(null);
 		cp.setPreferredSize(new Dimension(1024, 768));
+
+		topPanel = new TablePanel();
+		topPanel.setLayout(new GridLayout(1, 3));
+		topPanel.setBounds(0, 0, 1024, 200);
+		cp.add(topPanel);
+
+		clock = new JLabel("12:00 PM");
+		clock.setHorizontalAlignment(JLabel.CENTER);
+		topPanel.add(clock);
 
 		frame.pack();
 		frame.setVisible(true);
