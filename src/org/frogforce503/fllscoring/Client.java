@@ -26,6 +26,7 @@ public class Client implements Runnable {
 		cp.add(topPanel);
 
 		clock = new JLabel("12:00 PM");
+		clock.setFont(new Font("Roboto Lt", Font.PLAIN, 72));
 		clock.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(clock);
 
@@ -41,7 +42,12 @@ public class Client implements Runnable {
 					break;
 				}
 			}
-		} catch (Exception e) {}
+		} catch(Exception e) {}
+
+		try {
+			Font font = Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemResourceAsStream("rsc/Roboto-Light.ttf"));
+			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
+		} catch(Exception e) {}
 
 		Client client = new Client();
 
