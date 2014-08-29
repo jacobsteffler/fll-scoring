@@ -25,7 +25,7 @@ public class Client implements Runnable {
 		topPanel.setBounds(0, 0, 1024, 200);
 		cp.add(topPanel);
 
-		clock = new JLabel("12:00 PM");
+		clock = new Clock();
 		clock.setFont(new Font("Roboto Lt", Font.PLAIN, 72));
 		clock.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(clock);
