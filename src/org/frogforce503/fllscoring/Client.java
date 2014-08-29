@@ -48,12 +48,13 @@ public class Client implements Runnable, ActionListener {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		setWidths();
 
-		//Test data
+		/* Test data
 		Team[] newteams = new Team[25];
 		for(int i = 0; i < newteams.length; i++) {
 			newteams[i] = new Team(i, "Hello");
 		}
 		setTeams(newteams);
+		*/
 
 		JTableHeader header = table.getTableHeader();
 		header.setPreferredSize(new Dimension(1024, 68));
