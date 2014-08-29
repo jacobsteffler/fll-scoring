@@ -1,3 +1,6 @@
+filesc=-C ../out rsc/Roboto-Light.ttf -C ../out org/frogforce503/fllscoring/Client.class -C ../out org/frogforce503/fllscoring/Client$$1.class -C ../out org/frogforce503/fllscoring/Clock.class -C ../out org/frogforce503/fllscoring/TablePanel.class
+filess=-C ../out org/frogforce503/fllscoring/Server.class -C ../out org/frogforce503/fllscoring/Team.class
+
 all:
 	javac -d ../out org/frogforce503/fllscoring/*
 
@@ -8,11 +11,11 @@ runs:
 	java -classpath ../out org.frogforce503.fllscoring.Server
 
 jarc:
-	jar cmf MFClient ../dist/Client.jar -C ../out .
+	jar cmf MFClient ../dist/Client.jar $(filesc)
 	chmod +x ../dist/Client.jar
 
 jars:
-	jar cmf MFServer ../dist/Server.jar -C ../out .
+	jar cmf MFServer ../dist/Server.jar $(filess)
 	chmod +x ../dist/Server.jar
 
 clean:
