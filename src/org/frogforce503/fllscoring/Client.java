@@ -10,6 +10,10 @@ public class Client implements Runnable {
 	private Container cp;
 	private JPanel topPanel;
 	private JLabel clock;
+	private JTable table;
+	private JScrollPane tablePane;
+
+	private String[] header = {"ID", "Team Name", "R1", "R2", "R3", "R4"};
 
 	public void run() {
 		frame = new JFrame("Scores");
@@ -29,6 +33,18 @@ public class Client implements Runnable {
 		clock.setFont(new Font("Roboto Lt", Font.PLAIN, 72));
 		clock.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(clock);
+
+		table = new JTable(new Team[10][6], header);
+		table.setEnabled(false);
+		table.getTableHeader().setPreferredSize(new Dimension(1024, 68));
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
+
+		tablePane = new JScrollPane(table);
+		tablePane.setBorder(null);
+		tablePane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		tablePane.setBounds(0, 200, 1024, 568);
+		cp.add(tablePane);
 
 		frame.pack();
 		frame.setVisible(true);
