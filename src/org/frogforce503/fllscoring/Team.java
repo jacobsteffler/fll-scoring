@@ -19,6 +19,22 @@ public class Team {
 		this.r4 = r4;
 	}
 
+	public int getID() {
+		return teamID;
+	}
+
+	public void setID(int id) {
+		teamID = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getR1() {
 		return r1;
 	}
