@@ -2,6 +2,7 @@ package org.frogforce503.fllscoring;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.*;
 import javax.swing.UIManager.*;
 
 public class Client implements Runnable {
@@ -13,7 +14,7 @@ public class Client implements Runnable {
 	private JTable table;
 	private JScrollPane tablePane;
 
-	private String[] header = {"ID", "Team Name", "R1", "R2", "R3", "R4"};
+	private String[] cols = {"ID", "Team Name", "R1", "R2", "R3", "R4"};
 
 	public void run() {
 		frame = new JFrame("Scores");
@@ -34,11 +35,26 @@ public class Client implements Runnable {
 		clock.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(clock);
 
-		table = new JTable(new Team[10][6], header);
+		table = new JTable(new Team[10][6], cols);
 		table.setEnabled(false);
-		table.getTableHeader().setPreferredSize(new Dimension(1024, 68));
-		table.getTableHeader().setReorderingAllowed(false);
-		table.getTableHeader().setResizingAllowed(false);
+		table.setRowHeight(50);
+		table.setShowGrid(true);
+		table.setGridColor(Color.GRAY);
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(150);
+		table.getColumnModel().getColumn(1).setPreferredWidth(474);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+
+		JTableHeader header = table.getTableHeader();
+		header.setPreferredSize(new Dimension(1024, 68));
+		header.setFont(new Font("Roboto Lt", Font.BOLD, 20));
+		((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+		header.setReorderingAllowed(false);
+		header.setResizingAllowed(false);
 
 		tablePane = new JScrollPane(table);
 		tablePane.setBorder(null);
