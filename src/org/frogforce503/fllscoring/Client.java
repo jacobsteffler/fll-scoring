@@ -16,6 +16,7 @@ public class Client implements Runnable, ActionListener {
 	private JScrollPane tablePane;
 	private Timer tableTimer;
 
+	private boolean fullscreen = false;
 	private int pages = 1, currentPage = 1;
 	private String[] cols = {"ID", "Team Name", "R1", "R2", "R3", "R4"};
 
@@ -70,6 +71,15 @@ public class Client implements Runnable, ActionListener {
 		tableTimer = new Timer(10000, this);
 		tableTimer.start();
 
+		Action fsAction = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				fullscreen = !fullscreen;
+				setFullScreen(fullscreen);
+			}
+		};
+		topPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('f'), "fs");
+		topPanel.getActionMap().put("fs", fsAction);
+
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -78,6 +88,25 @@ public class Client implements Runnable, ActionListener {
 		if(e.getSource() == tableTimer) {
 			currentPage = currentPage == pages ? 1 : currentPage + 1;
 			table.scrollRectToVisible(new Rectangle(0, 500 * currentPage - 500, 1024, 500));
+		}
+	}
+
+	private void setFullScreen(boolean fs) {
+		if(fs) {
+			frame.dispose();
+			frame.setUndecorated(true);
+			if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+				frame.setVisible(true);
+				frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			} else {
+				frame.getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
+			}			
+		} else {
+			frame.dispose();
+			frame.setUndecorated(false);
+			frame.setExtendedState(JFrame.NORMAL);
+			frame.pack();
+			frame.setVisible(true);
 		}
 	}
 
@@ -110,7 +139,7 @@ public class Client implements Runnable, ActionListener {
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
 		table.getColumnModel().getColumn(5).setPreferredWidth(100);
-		
+
 		DefaultTableCellRenderer cRenderer = new DefaultTableCellRenderer();
 		cRenderer.setHorizontalAlignment(JLabel.CENTER);
 		for(int i = 0; i < cols.length; i++) {
