@@ -147,6 +147,10 @@ public class Client implements Runnable, ActionListener {
 		}
 	}
 
+	public Client() {
+		SwingUtilities.invokeLater(this);
+	}
+
 	public static void main(String[] args) {
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -162,8 +166,6 @@ public class Client implements Runnable, ActionListener {
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
 		} catch(Exception e) {}
 
-		Client client = new Client();
-
-		SwingUtilities.invokeLater(client);
+		new Client();
 	}
 }
