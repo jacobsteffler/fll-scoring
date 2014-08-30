@@ -49,12 +49,12 @@ public class Client implements Runnable, ActionListener {
 		setWidths();
 
 		/* Test data
-		Team[] newteams = new Team[25];
-		for(int i = 0; i < newteams.length; i++) {
-			newteams[i] = new Team(i, "Hello");
-		}
-		setTeams(newteams);
-		*/
+		   Team[] newteams = new Team[25];
+		   for(int i = 0; i < newteams.length; i++) {
+		   newteams[i] = new Team(i, "Hello");
+		   }
+		   setTeams(newteams);
+		   */
 
 		JTableHeader header = table.getTableHeader();
 		header.setPreferredSize(new Dimension(1024, 68));
@@ -86,10 +86,8 @@ public class Client implements Runnable, ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == tableTimer) {
-			currentPage = currentPage == pages ? 1 : currentPage + 1;
-			table.scrollRectToVisible(new Rectangle(0, 500 * currentPage - 500, 1024, 500));
-		}
+		currentPage = currentPage == pages ? 1 : currentPage + 1;
+		table.scrollRectToVisible(new Rectangle(0, 500 * (currentPage - 1), 1024, 500));
 	}
 
 	private void setFullScreen(boolean fs) {
@@ -114,6 +112,10 @@ public class Client implements Runnable, ActionListener {
 	private void setTeams(Team[] teams) {
 		int total = (int) (10 * Math.ceil(teams.length / 10.0));
 		pages = total / 10;
+		if(currentPage > pages) {
+			currentPage = 1;
+			table.scrollRectToVisible(new Rectangle(0, 0, 1024, 500));
+		}
 
 		Object[][] data = new Object[total][6];
 		for(int i = 0; i < teams.length; i++) {
