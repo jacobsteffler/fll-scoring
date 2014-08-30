@@ -1,4 +1,4 @@
-filesc=-C ../out rsc/Roboto-Light.ttf -C ../out org/frogforce503/fllscoring/Client.class -C ../out org/frogforce503/fllscoring/Client\$$1.class -C ../out org/frogforce503/fllscoring/Clock.class -C ../out org/frogforce503/fllscoring/TablePanel.class -C ../out org/frogforce503/fllscoring/Team.class
+filesc=-C ../out rsc/Roboto-Light.ttf -C ../out org/frogforce503/fllscoring/Client.class -C ../out org/frogforce503/fllscoring/Clock.class -C ../out org/frogforce503/fllscoring/ClientPanel\$$TablePanel.class -C ../out org/frogforce503/fllscoring/Team.class -C ../out org/frogforce503/fllscoring/ClientPanel.class
 filess=-C ../out org/frogforce503/fllscoring/Server.class -C ../out org/frogforce503/fllscoring/Team.class
 
 all:
