@@ -5,11 +5,34 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.UIManager.*;
 
-public class Server {
+public class Server implements Runnable {
+	//GUI element declarations
+	private JFrame frame;
+	private JPanel sp;
+
 	private ServerSocket ssock = new ServerSocket();
 	private int port = 0;
 
-	public Server() throws IOException {
+	public void run() {
+		frame = new JFrame("Scoring server (port " + port + ")");
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		sp = new ServerPanel();
+		frame.setContentPane(sp);
+
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+	public Server(int portIn) throws IOException {
+		port = portIn;
+		try {
+			if(port > 0 && port <= 65535) ssock = new ServerSocket(port);
+		} catch(BindException e)  {
+			port = 0;
+		}
+
 		while(!ssock.isBound()) {
 			while(port < 1 || port > 65535) {
 				String ports = (JOptionPane.showInputDialog(null, "Please enter a port number (1-65535):", "Port", JOptionPane.QUESTION_MESSAGE));
@@ -27,6 +50,9 @@ public class Server {
 				port = 0;
 			}
 		}
+		System.out.println("Listening for clients on port " + port + "...");
+
+		SwingUtilities.invokeLater(this);
 
 		Socket client;
 		while(true) {
@@ -44,8 +70,15 @@ public class Server {
 			}
 		} catch(Exception e) {}
 
+		int port = 0;
+		if(args.length > 0) {
+			try {
+				port = Integer.parseInt(args[0]);
+			} catch(NumberFormatException e) {}
+		}
+
 		try {
-			new Server();
+			new Server(port);
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.exit(1);

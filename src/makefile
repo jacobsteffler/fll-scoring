@@ -1,5 +1,5 @@
 filesc=-C ../out rsc/Roboto-Light.ttf -C ../out org/frogforce503/fllscoring/Client.class -C ../out org/frogforce503/fllscoring/Clock.class -C ../out org/frogforce503/fllscoring/ClientPanel\$$TablePanel.class -C ../out org/frogforce503/fllscoring/Team.class -C ../out org/frogforce503/fllscoring/ClientPanel.class
-filess=-C ../out org/frogforce503/fllscoring/Server.class -C ../out org/frogforce503/fllscoring/Team.class
+filess=-C ../out org/frogforce503/fllscoring/Server.class -C ../out org/frogforce503/fllscoring/ServerPanel.class -C ../out org/frogforce503/fllscoring/Team.class
 
 all:
 	javac -d ../out org/frogforce503/fllscoring/*
@@ -8,7 +8,7 @@ runc:
 	java -classpath ../out org.frogforce503.fllscoring.Client
 
 runs:
-	java -classpath ../out org.frogforce503.fllscoring.Server
+	java -classpath ../out org.frogforce503.fllscoring.Server 41361
 
 jarc:
 	jar cmf MFClient ../dist/Client.jar $(filesc)
