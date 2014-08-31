@@ -3,8 +3,6 @@ package org.frogforce503.fllscoring;
 public class Team {
 	private int teamID, r1, r2, r3, r4;
 	private String name;
-        private char whatssup;
-
 
 	public Team(int id, String name) {
 		teamID = id;
