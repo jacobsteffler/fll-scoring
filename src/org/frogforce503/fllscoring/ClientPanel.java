@@ -37,7 +37,7 @@ public class ClientPanel extends JPanel implements ActionListener{
 		table.setShowGrid(true);
 		table.setGridColor(Color.GRAY);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		setWidths();
+		formatTable(table);
 
 		JTableHeader header = table.getTableHeader();
 		header.setPreferredSize(new Dimension(1024, 68));
@@ -79,15 +79,11 @@ public class ClientPanel extends JPanel implements ActionListener{
 			data[i][5] = teams[i].getR4();
 		}
 
-		setData(data);
-	}
-
-	private void setData(Object[][] data) {
 		table.setModel(new DefaultTableModel(data, cols));
-		setWidths();
+		formatTable(table);
 	}
 
-	private void setWidths() {
+	private void formatTable(JTable table) {
 		table.getColumnModel().getColumn(0).setPreferredWidth(150);
 		table.getColumnModel().getColumn(1).setPreferredWidth(474);
 		table.getColumnModel().getColumn(2).setPreferredWidth(100);

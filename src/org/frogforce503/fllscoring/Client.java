@@ -37,12 +37,16 @@ public class Client implements Runnable {
 					break;
 				}
 			}
-		} catch(Exception e) {}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemResourceAsStream("rsc/Roboto-Light.ttf"));
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
-		} catch(Exception e) {}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		new Client();
 	}

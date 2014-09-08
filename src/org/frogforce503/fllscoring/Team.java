@@ -19,6 +19,10 @@ public class Team {
 		this.r4 = r4;
 	}
 
+	public String toString() {
+		return "" + teamID + ", " + name;
+	}
+
 	public int getID() {
 		return teamID;
 	}
