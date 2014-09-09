@@ -1,10 +1,13 @@
 package org.frogforce503.fllscoring;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.*;
+
+import javax.swing.JLabel;
+import javax.swing.Timer;
 
 public class Clock extends JLabel implements ActionListener {
 	private DateFormat format;

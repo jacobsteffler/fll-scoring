@@ -46,7 +46,7 @@ public class Team {
 	public void setR1(int r1) {
 		this.r1 = r1;
 	}
-	
+
 	public int getR2() {
 		return r2;
 	}

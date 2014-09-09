@@ -1,9 +1,7 @@
 package org.frogforce503.fllscoring;
 
-import java.io.*;
-import java.net.*;
-import javax.swing.*;
-import javax.swing.UIManager.*;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class Server {
 	public Server() {
@@ -17,7 +15,7 @@ public class Server {
 					break;
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
