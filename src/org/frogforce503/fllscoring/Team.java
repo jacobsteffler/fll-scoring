@@ -1,9 +1,13 @@
 package org.frogforce503.fllscoring;
 
-public class Team {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Team implements Comparable<Team> {
 	private int teamID, r1, r2, r3, r4;
 	private String name;
-	
+
 	public Team() {
 		this(0, "", 0, 0, 0, 0);
 	}
@@ -71,5 +75,38 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public ArrayList<Integer> getScores() {
+		return new ArrayList<Integer>(Arrays.asList(new Integer[] { r1, r2, r3,
+				r4 }));
+	}
+
+	public int compareTo(Team other) {
+		ArrayList<Integer> s1 = getScores(), s2 = other.getScores();
+		Collections.sort(s1, Collections.reverseOrder());
+		Collections.sort(s2, Collections.reverseOrder());
+
+		if (s1.get(0) > s2.get(0))
+			return 1;
+		if (s1.get(0) < s2.get(0))
+			return -1;
+
+		if (s1.get(1) > s2.get(1))
+			return 1;
+		if (s1.get(1) < s2.get(1))
+			return -1;
+
+		if (s1.get(2) > s2.get(2))
+			return 1;
+		if (s1.get(2) < s2.get(2))
+			return -1;
+
+		if (s1.get(3) > s2.get(3))
+			return 1;
+		if (s1.get(3) < s2.get(3))
+			return -1;
+
+		return 0;
 	}
 }
