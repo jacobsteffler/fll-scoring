@@ -15,6 +15,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.firebase.client.Firebase;
 
 public class Server implements Runnable {
+	//GUI element declarations
+	JFrame frame;
+
 	List<Team> teams = new ArrayList<Team>();
 	Firebase fb;
 
@@ -47,6 +50,7 @@ public class Server implements Runnable {
 		// Sort and send
 	}
 
+	//TODO Structural change
 	private void setTeams(File file) throws FileNotFoundException {
 		Scanner scan = new Scanner(new FileReader(file));
 		String[] info;
