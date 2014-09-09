@@ -91,7 +91,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 
 		Object[][] data = new Object[total][6];
 		for (int i = 0; i < teams.length; i++) {
-			data[i][0] = teams[i].getID();
+			data[i][0] = teams[i].getTeamID();
 			data[i][1] = teams[i].getName();
 			data[i][2] = teams[i].getR1();
 			data[i][3] = teams[i].getR2();

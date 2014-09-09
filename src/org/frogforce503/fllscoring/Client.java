@@ -9,6 +9,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 public class Client implements Runnable {
 	// GUI element declarations
 	private JFrame frame;
@@ -27,6 +32,8 @@ public class Client implements Runnable {
 	}
 
 	public Client() {
+		Firebase firebase = new Firebase("https://fll-scoring.firebaseio.com/");
+
 		SwingUtilities.invokeLater(this);
 	}
 
@@ -43,8 +50,8 @@ public class Client implements Runnable {
 		}
 
 		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, ClassLoader
-					.getSystemResourceAsStream("Roboto-Light.ttf"));
+			Font font = Font.createFont(Font.TRUETYPE_FONT,
+					ClassLoader.getSystemResourceAsStream("Roboto-Light.ttf"));
 			GraphicsEnvironment.getLocalGraphicsEnvironment()
 					.registerFont(font);
 		} catch (Exception e) {

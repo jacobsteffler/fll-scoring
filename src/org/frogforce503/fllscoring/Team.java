@@ -3,11 +3,13 @@ package org.frogforce503.fllscoring;
 public class Team {
 	private int teamID, r1, r2, r3, r4;
 	private String name;
+	
+	public Team() {
+		this(0, "", 0, 0, 0, 0);
+	}
 
 	public Team(int id, String name) {
-		teamID = id;
-		this.name = name;
-		r1 = r2 = r3 = r4 = 0;
+		this(id, name, 0, 0, 0, 0);
 	}
 
 	public Team(int id, String name, int r1, int r2, int r3, int r4) {
@@ -23,20 +25,12 @@ public class Team {
 		return "" + teamID + ", " + name;
 	}
 
-	public int getID() {
+	public int getTeamID() {
 		return teamID;
 	}
 
-	public void setID(int id) {
-		teamID = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setTeamID(int teamID) {
+		this.teamID = teamID;
 	}
 
 	public int getR1() {
@@ -69,5 +63,13 @@ public class Team {
 
 	public void setR4(int r4) {
 		this.r4 = r4;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

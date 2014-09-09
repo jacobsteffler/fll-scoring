@@ -1,10 +1,21 @@
 package org.frogforce503.fllscoring;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-public class Server {
-	public Server() {
+import com.firebase.client.Firebase;
+
+public class Server implements Runnable {
+	List<Team> teams = new ArrayList<Team>();
+	
+	public Server(String event) {
+		Firebase firebase = new Firebase("https://fll-scoring.firebaseio.com/").child(event);
+
+		SwingUtilities.invokeLater(this);
 	}
 
 	public static void main(String[] args) {
@@ -18,5 +29,11 @@ public class Server {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		new Server("Frog Force Frenzy"); //TODO
+	}
+
+	public void run() {
+		// UI Stuff.
 	}
 }
