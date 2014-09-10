@@ -21,7 +21,7 @@ public class Client implements Runnable {
 	public void run() {
 		frame = new JFrame(event);
 		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //TODO
 
 		cp = new ClientPanel();
 		frame.setContentPane(cp);
@@ -32,6 +32,7 @@ public class Client implements Runnable {
 
 	public Client(String event) {
 		this.event = event;
+		
 		Firebase firebase = new Firebase("https://fll-scoring.firebaseio.com/").child(event);
 
 		SwingUtilities.invokeLater(this);
