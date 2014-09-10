@@ -9,18 +9,17 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 
 public class Client implements Runnable {
 	// GUI element declarations
 	private JFrame frame;
 	private JPanel cp;
+	
+	private String event;
 
 	public void run() {
-		frame = new JFrame("Scores");
+		frame = new JFrame(event);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -31,8 +30,9 @@ public class Client implements Runnable {
 		frame.setVisible(true);
 	}
 
-	public Client() {
-		Firebase firebase = new Firebase("https://fll-scoring.firebaseio.com/");
+	public Client(String event) {
+		this.event = event;
+		Firebase firebase = new Firebase("https://fll-scoring.firebaseio.com/").child(event);
 
 		SwingUtilities.invokeLater(this);
 	}
@@ -58,6 +58,6 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 
-		new Client();
+		new Client("Frog Force Frenzy"); //TODO
 	}
 }

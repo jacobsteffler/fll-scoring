@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -15,7 +17,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.firebase.client.Firebase;
 
 public class Server implements Runnable {
-	//GUI element declarations
+	// GUI element declarations
 	JFrame frame;
 
 	List<Team> teams = new ArrayList<Team>();
@@ -47,10 +49,12 @@ public class Server implements Runnable {
 	}
 
 	private void messageClients() {
-		// Sort and send
+		List<Team> sorted = new ArrayList<Team>(teams);
+		Collections.sort(sorted, Collections.reverseOrder());
+		fb.setValue(sorted);
 	}
 
-	//TODO Structural change
+	// TODO Structural change
 	private void setTeams(File file) throws FileNotFoundException {
 		Scanner scan = new Scanner(new FileReader(file));
 		String[] info;
