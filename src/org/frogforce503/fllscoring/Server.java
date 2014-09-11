@@ -2,6 +2,7 @@ package org.frogforce503.fllscoring;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -45,7 +46,7 @@ public class Server implements Runnable, ActionListener {
 	private JToggleButton onTop;
 	private JComboBox<Team> cb;
 	private JTextField r1, r2, r3, r4;
-	private final JFileChooser fc = new JFileChooser(); //TODO Custom?
+	private final JFileChooser fc = new JFileChooser(); // TODO Custom?
 
 	private List<Team> teams = new ArrayList<Team>();
 	private Firebase fb;
@@ -248,45 +249,78 @@ public class Server implements Runnable, ActionListener {
 			if (i != teams.size() - 1)
 				out.newLine();
 		}
-		
+
 		out.flush();
 		out.close();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		
-		if(source == load) {
-			if(fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+
+		if (source == load) {
+			if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
 				try {
 					setTeams(fc.getSelectedFile());
 					messageClients();
 					populateCB();
-				} catch(FileNotFoundException e1) {
-					JOptionPane.showMessageDialog(frame, "The file could not be found.", "File Not Found", JOptionPane.ERROR_MESSAGE);
+				} catch (FileNotFoundException e1) {
+					JOptionPane.showMessageDialog(frame,
+							"The file could not be found.", "File Not Found",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		} else if(source == save) {
-			if(fc.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+		} else if (source == save) {
+			if (fc.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
 				try {
 					saveFile(fc.getSelectedFile());
-				} catch(IOException e1) {
-					JOptionPane.showMessageDialog(frame, "The file could not be opened.", "IO Error", JOptionPane.ERROR_MESSAGE);
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(frame,
+							"The file could not be opened.", "IO Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		} else if(source == rankings) {
-			//TODO
-		} else if(source == onTop) {
+		} else if (source == rankings) {
+			// TODO
+		} else if (source == onTop) {
 			frame.setAlwaysOnTop(onTop.isSelected());
-		} else if(source == cb) {
-			if(populated) {
-				r1.setText(Integer.toString(((Team) cb.getSelectedItem()).getR1()));
-				r2.setText(Integer.toString(((Team) cb.getSelectedItem()).getR2()));
-				r3.setText(Integer.toString(((Team) cb.getSelectedItem()).getR3()));
-				r4.setText(Integer.toString(((Team) cb.getSelectedItem()).getR4()));
+		} else if (source == cb) {
+			if (populated) {
+				r1.setText(Integer.toString(((Team) cb.getSelectedItem())
+						.getR1()));
+				r2.setText(Integer.toString(((Team) cb.getSelectedItem())
+						.getR2()));
+				r3.setText(Integer.toString(((Team) cb.getSelectedItem())
+						.getR3()));
+				r4.setText(Integer.toString(((Team) cb.getSelectedItem())
+						.getR4()));
 			}
-		} else if(source == accept || source == r1 || source == r2 || source == r3 || source == r4) {
-			//TODO
+		} else if (source == accept || source == r1 || source == r2
+				|| source == r3 || source == r4) {
+			int newR1, newR2, newR3, newR4;
+			try {
+				newR1 = Integer.parseInt(r1.getText());
+				newR2 = Integer.parseInt(r2.getText());
+				newR3 = Integer.parseInt(r3.getText());
+				newR4 = Integer.parseInt(r4.getText());
+
+				if (newR1 < 0 || newR2 < 0 || newR3 < 0 || newR4 < 0)
+					throw new NumberFormatException("Cannot be less than 0.");
+			} catch (NumberFormatException e1) {
+				Toolkit.getDefaultToolkit().beep();
+				r1.setText(String.valueOf(((Team) cb.getSelectedItem()).getR1()));
+				r2.setText(String.valueOf(((Team) cb.getSelectedItem()).getR2()));
+				r3.setText(String.valueOf(((Team) cb.getSelectedItem()).getR3()));
+				r4.setText(String.valueOf(((Team) cb.getSelectedItem()).getR4()));
+
+				return;
+			}
+
+			((Team) cb.getSelectedItem()).setR1(newR1);
+			((Team) cb.getSelectedItem()).setR2(newR2);
+			((Team) cb.getSelectedItem()).setR3(newR3);
+			((Team) cb.getSelectedItem()).setR4(newR4);
+
+			messageClients();
 		}
 	}
 }

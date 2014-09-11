@@ -83,6 +83,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 
 	public void setTeams(Team[] teams) {
 		int total = (int) (10 * Math.ceil(teams.length / 10.0));
+		if(total == 0) total = 10;
 		pages = total / 10;
 		if (currentPage > pages) {
 			currentPage = 1;

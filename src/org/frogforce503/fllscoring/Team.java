@@ -77,13 +77,13 @@ public class Team implements Comparable<Team> {
 		this.name = name;
 	}
 
-	public ArrayList<Integer> getScores() {
+	public ArrayList<Integer> scores() {
 		return new ArrayList<Integer>(Arrays.asList(new Integer[] { r1, r2, r3,
 				r4 }));
 	}
 
 	public int compareTo(Team other) {
-		ArrayList<Integer> s1 = getScores(), s2 = other.getScores();
+		ArrayList<Integer> s1 = scores(), s2 = other.scores();
 		Collections.sort(s1, Collections.reverseOrder());
 		Collections.sort(s2, Collections.reverseOrder());
 
