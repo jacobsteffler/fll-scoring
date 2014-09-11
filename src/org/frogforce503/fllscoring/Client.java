@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -20,14 +21,14 @@ public class Client implements Runnable {
 	// GUI element declarations
 	private JFrame frame;
 	private ClientPanel cp;
-	
+
 	private List<Team> teams = new ArrayList<Team>();
 	private String event;
 
 	public void run() {
 		frame = new JFrame(event);
 		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //TODO
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // TODO
 
 		cp = new ClientPanel();
 		frame.setContentPane(cp);
@@ -38,15 +39,16 @@ public class Client implements Runnable {
 
 	public Client(String event) {
 		this.event = event;
-		
-		Firebase fb = new Firebase("https://fll-scoring.firebaseio.com/").child(event);
+
+		Firebase fb = new Firebase("https://fll-scoring.firebaseio.com/")
+				.child(event);
 		fb.addValueEventListener(new ValueEventListener() {
-			public void onCancelled(FirebaseError f) {	
+			public void onCancelled(FirebaseError f) {
 			}
-			
+
 			public void onDataChange(DataSnapshot d) {
 				teams.clear();
-				for(DataSnapshot o : d.getChildren()) {
+				for (DataSnapshot o : d.getChildren()) {
 					int id = ((Long) o.child("teamID").getValue()).intValue();
 					String name = (String) o.child("name").getValue();
 					int r1 = ((Long) o.child("r1").getValue()).intValue();
@@ -55,8 +57,7 @@ public class Client implements Runnable {
 					int r4 = ((Long) o.child("r4").getValue()).intValue();
 					teams.add(new Team(id, name, r1, r2, r3, r4));
 				}
-				
-				
+
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						cp.setTeams(teams.toArray(new Team[0]));
@@ -89,6 +90,14 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 
-		new Client("Frog Force Frenzy"); //TODO
+		String event = JOptionPane
+				.showInputDialog(
+						null,
+						"Enter a name for this event.\n(Must be exactly the same for server and all clients.)",
+						"Event Name", JOptionPane.QUESTION_MESSAGE);
+		
+		if (event != null) {
+			new Client(event);
+		}
 	}
 }

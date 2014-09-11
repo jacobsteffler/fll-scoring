@@ -46,7 +46,7 @@ public class Server implements Runnable, ActionListener {
 	private JToggleButton onTop;
 	private JComboBox<Team> cb;
 	private JTextField r1, r2, r3, r4;
-	private final JFileChooser fc = new JFileChooser(); // TODO Custom?
+	private final JFileChooser fc = new MyFileChooser(frame); // TODO Custom?
 
 	private List<Team> teams = new ArrayList<Team>();
 	private Firebase fb;
@@ -73,7 +73,15 @@ public class Server implements Runnable, ActionListener {
 			e.printStackTrace();
 		}
 
-		new Server("Frog Force Frenzy"); // TODO
+		String event = JOptionPane
+				.showInputDialog(
+						null,
+						"Enter a name for this event.\n(Must be exactly the same for server and all clients.)",
+						"Event Name", JOptionPane.QUESTION_MESSAGE);
+
+		if (event != null) {
+			new Server(event);
+		}
 	}
 
 	public void run() {
@@ -177,6 +185,7 @@ public class Server implements Runnable, ActionListener {
 		input.add(accept);
 
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
@@ -321,6 +330,35 @@ public class Server implements Runnable, ActionListener {
 			((Team) cb.getSelectedItem()).setR4(newR4);
 
 			messageClients();
+		}
+	}
+
+	private class MyFileChooser extends JFileChooser {
+		private JFrame parent;
+
+		public MyFileChooser(JFrame parent) {
+			this.parent = parent;
+		}
+
+		public void approveSelection() {
+			if (getDialogType() == SAVE_DIALOG) {
+				File selectedFile = getSelectedFile();
+				if ((selectedFile != null) && selectedFile.exists()) {
+					int response = JOptionPane
+							.showConfirmDialog(
+									parent,
+									"The file "
+											+ selectedFile.getName()
+											+ " already exists. Do you want to replace the existing file?",
+									"Overwrite file?",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.WARNING_MESSAGE);
+					if (response != JOptionPane.YES_OPTION)
+						return;
+				}
+			}
+
+			super.approveSelection();
 		}
 	}
 }
