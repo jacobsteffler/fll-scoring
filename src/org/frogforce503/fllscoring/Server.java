@@ -35,6 +35,8 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.firebase.client.Firebase;
 
@@ -93,7 +95,7 @@ public class Server implements Runnable, ActionListener {
 		tb = new JToolBar();
 		tb.setFloatable(false);
 		tb.setRollover(true);
-		tb.setBorderPainted(false); // TODO
+		tb.setBorderPainted(false);
 		tb.setFocusCycleRoot(true); // TODO
 		frame.add(tb, BorderLayout.PAGE_START);
 
@@ -183,10 +185,14 @@ public class Server implements Runnable, ActionListener {
 		accept = new JButton("Accept");
 		accept.addActionListener(this);
 		input.add(accept);
+		
+		fc.setFileFilter(new FileNameExtensionFilter("Plain text files (*.txt)", "txt"));
 
+		((JPanel) frame.getContentPane()).setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		r1.requestFocusInWindow();
 	}
 
 	private void messageClients() {
