@@ -31,7 +31,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 	private Timer tableTimer;
 
 	private int pages = 1, currentPage = 1;
-	private String[] cols = { "ID", "Team Name", "R1", "R2", "R3", "R4" };
+	private String[] cols = { "Rank", "ID", "Team Name", "R1", "R2", "R3", "R4" };
 
 	public ClientPanel() {
 		setLayout(null);
@@ -47,7 +47,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 		clock.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(clock);
 
-		table = new JTable(new Object[10][6], cols);
+		table = new JTable(new Object[10][7], cols);
 		table.setEnabled(false);
 		table.setFont(new Font("Roboto Lt", Font.BOLD, 24));
 		table.setRowHeight(50);
@@ -83,21 +83,23 @@ public class ClientPanel extends JPanel implements ActionListener {
 
 	public void setTeams(Team[] teams) {
 		int total = (int) (10 * Math.ceil(teams.length / 10.0));
-		if(total == 0) total = 10;
+		if (total == 0)
+			total = 10;
 		pages = total / 10;
 		if (currentPage > pages) {
 			currentPage = 1;
 			table.scrollRectToVisible(new Rectangle(0, 0, 1024, 500));
 		}
 
-		Object[][] data = new Object[total][6];
+		Object[][] data = new Object[total][7];
 		for (int i = 0; i < teams.length; i++) {
-			data[i][0] = teams[i].getTeamID();
-			data[i][1] = teams[i].getName();
-			data[i][2] = teams[i].getR1();
-			data[i][3] = teams[i].getR2();
-			data[i][4] = teams[i].getR3();
-			data[i][5] = teams[i].getR4();
+			data[i][0] = i + 1;
+			data[i][1] = teams[i].getTeamID();
+			data[i][2] = teams[i].getName();
+			data[i][3] = teams[i].getR1();
+			data[i][4] = teams[i].getR2();
+			data[i][5] = teams[i].getR3();
+			data[i][6] = teams[i].getR4();
 		}
 
 		table.setModel(new DefaultTableModel(data, cols));
@@ -105,12 +107,13 @@ public class ClientPanel extends JPanel implements ActionListener {
 	}
 
 	private void formatTable(JTable table) {
-		table.getColumnModel().getColumn(0).setPreferredWidth(150);
-		table.getColumnModel().getColumn(1).setPreferredWidth(474);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(424);
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
 		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		table.getColumnModel().getColumn(6).setPreferredWidth(100);
 
 		DefaultTableCellRenderer cRenderer = new DefaultTableCellRenderer();
 		cRenderer.setHorizontalAlignment(JLabel.CENTER);

@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -95,7 +94,7 @@ public class Client implements Runnable {
 						null,
 						"Enter a name for this event.\n(Must be exactly the same for server and all clients.)",
 						"Event Name", JOptionPane.QUESTION_MESSAGE);
-		
+
 		if (event != null) {
 			new Client(event);
 		}

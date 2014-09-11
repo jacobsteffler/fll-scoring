@@ -29,6 +29,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
@@ -48,7 +50,7 @@ public class Server implements Runnable, ActionListener {
 	private JToggleButton onTop;
 	private JComboBox<Team> cb;
 	private JTextField r1, r2, r3, r4;
-	private final JFileChooser fc = new MyFileChooser(frame); // TODO Custom?
+	private final JFileChooser fc = new MyFileChooser(frame);
 
 	private List<Team> teams = new ArrayList<Team>();
 	private Firebase fb;
@@ -96,7 +98,7 @@ public class Server implements Runnable, ActionListener {
 		tb.setFloatable(false);
 		tb.setRollover(true);
 		tb.setBorderPainted(false);
-		tb.setFocusCycleRoot(true); // TODO
+		tb.setFocusCycleRoot(true);
 		frame.add(tb, BorderLayout.PAGE_START);
 
 		ImageIcon loadIcon = new ImageIcon(
@@ -185,10 +187,12 @@ public class Server implements Runnable, ActionListener {
 		accept = new JButton("Accept");
 		accept.addActionListener(this);
 		input.add(accept);
-		
-		fc.setFileFilter(new FileNameExtensionFilter("Plain text files (*.txt)", "txt"));
 
-		((JPanel) frame.getContentPane()).setBorder(new EmptyBorder(5, 5, 5, 5));
+		fc.setFileFilter(new FileNameExtensionFilter(
+				"Plain text files (*.txt)", "txt"));
+
+		((JPanel) frame.getContentPane())
+				.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -295,7 +299,30 @@ public class Server implements Runnable, ActionListener {
 				}
 			}
 		} else if (source == rankings) {
-			// TODO
+			ArrayList<Team> sorted = new ArrayList<Team>(teams);
+			Collections.sort(sorted, Collections.reverseOrder());
+
+			Object[][] data = new Object[sorted.size()][7];
+
+			for (int i = 0; i < sorted.size(); i++) {
+				Team t = sorted.get(i);
+				data[i][0] = i + 1;
+				data[i][1] = t.getTeamID();
+				data[i][2] = t.getName();
+				data[i][3] = t.getR1();
+				data[i][4] = t.getR2();
+				data[i][5] = t.getR3();
+				data[i][6] = t.getR4();
+			}
+
+			JTable table = new JTable(data, new String[] { "Rank", "ID",
+					"Team Name", "R1", "R2", "R3", "R4" });
+			JScrollPane pane = new JScrollPane(table);
+			JFrame frame = new JFrame();
+			frame.setTitle("Rankings");
+			frame.add(pane);
+			frame.pack();
+			frame.setVisible(true);
 		} else if (source == onTop) {
 			frame.setAlwaysOnTop(onTop.isSelected());
 		} else if (source == cb) {
