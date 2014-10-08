@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,8 +93,10 @@ public class Server implements Runnable, ActionListener {
 	public void run() {
 		frame = new JFrame(event);
 		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
+
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new Confirm(frame));
 
 		tb = new JToolBar();
 		tb.setFloatable(false);
@@ -224,7 +228,6 @@ public class Server implements Runnable, ActionListener {
 		}
 	}
 
-	// TODO Structural change
 	private void setTeams(File file) throws FileNotFoundException {
 		Scanner scan = new Scanner(new FileReader(file));
 		String[] info;
@@ -392,6 +395,24 @@ public class Server implements Runnable, ActionListener {
 			}
 
 			super.approveSelection();
+		}
+	}
+
+	private class Confirm extends WindowAdapter {
+		private JFrame parent;
+
+		public Confirm(JFrame parent) {
+			this.parent = parent;
+		}
+
+		public void windowClosing(WindowEvent e) {
+			int choice = JOptionPane
+					.showConfirmDialog(
+							parent,
+							"Are you sure you want to exit? Unsaved scores will be lost.",
+							"Exit?", JOptionPane.YES_NO_OPTION);
+			if (choice == JOptionPane.YES_OPTION)
+				System.exit(0);
 		}
 	}
 }
