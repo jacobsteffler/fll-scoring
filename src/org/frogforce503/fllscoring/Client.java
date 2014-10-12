@@ -2,11 +2,15 @@ package org.frogforce503.fllscoring;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -23,6 +27,8 @@ public class Client implements Runnable {
 
 	private List<Team> teams = new ArrayList<Team>();
 	private String event;
+	
+	private boolean fs = false;
 
 	public void run() {
 		frame = new JFrame(event);
@@ -31,6 +37,17 @@ public class Client implements Runnable {
 
 		cp = new ClientPanel();
 		frame.setContentPane(cp);
+		
+		cp.getInputMap().put(KeyStroke.getKeyStroke('f'), "toggleFS");
+		cp.getActionMap().put("toggleFS", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						toggleFS();
+					}
+				});
+			}
+		});
 
 		frame.pack();
 		frame.setVisible(true);
@@ -38,6 +55,14 @@ public class Client implements Runnable {
 
 	public Client(String event) {
 		this.event = event;
+		
+		try {
+			SwingUtilities.invokeAndWait(this);
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		Firebase fb = new Firebase("https://fll-scoring.firebaseio.com/")
 				.child(event);
@@ -64,8 +89,29 @@ public class Client implements Runnable {
 				});
 			}
 		});
-
-		SwingUtilities.invokeLater(this);
+	}
+	
+	private void toggleFS() {
+		fs = !fs;
+		
+		if(fs) {
+            frame.dispose();
+            frame.setUndecorated(true);
+            if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+                frame.setVisible(true);
+                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            } else { // OS X, Linux, etc.
+                frame.getGraphicsConfiguration().getDevice()
+                        .setFullScreenWindow(frame);
+            }
+        } else { // Set Windowed
+            frame.dispose();
+            frame.setUndecorated(false);
+            frame.setExtendedState(JFrame.NORMAL);
+            frame.pack();
+            frame.setVisible(true);
+            frame.invalidate();
+        }
 	}
 
 	public static void main(String[] args) {
