@@ -6,11 +6,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,14 +40,28 @@ public class ClientPanel extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(1024, 768));
 
 		topPanel = new TablePanel();
-		topPanel.setLayout(new GridLayout(1, 3));
+		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.LINE_AXIS));
 		topPanel.setBounds(0, 0, 1024, 200);
 		add(topPanel);
+
+		ImageIcon firstLogo = new ImageIcon(
+				ClassLoader.getSystemResource("FIRST.png"));
+		JLabel first = new JLabel(firstLogo);
+		topPanel.add(Box.createHorizontalGlue());
+		topPanel.add(first);
+		topPanel.add(Box.createHorizontalGlue());
 
 		clock = new Clock();
 		clock.setFont(new Font("Roboto Lt", Font.PLAIN, 72));
 		clock.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(clock);
+		topPanel.add(Box.createHorizontalGlue());
+
+		ImageIcon fffLogo = new ImageIcon(
+				ClassLoader.getSystemResource("FFF.png"));
+		JLabel fff = new JLabel(fffLogo);
+		topPanel.add(fff);
+		topPanel.add(Box.createHorizontalGlue());
 
 		table = new JTable(new Object[10][7], cols);
 		table.setEnabled(false);
@@ -121,18 +137,6 @@ public class ClientPanel extends JPanel implements ActionListener {
 			table.getColumnModel().getColumn(i).setCellRenderer(cRenderer);
 		}
 	}
-
-	/*
-	 * private void setFullScreen(boolean fs) { if(fs) { frame.dispose();
-	 * frame.setUndecorated(true);
-	 * if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
-	 * frame.setVisible(true); frame.setExtendedState(JFrame.MAXIMIZED_BOTH); }
-	 * else {
-	 * frame.getGraphicsConfiguration().getDevice().setFullScreenWindow(frame);
-	 * } } else { frame.dispose(); frame.setUndecorated(false);
-	 * frame.setExtendedState(JFrame.NORMAL); frame.pack();
-	 * frame.setVisible(true); } }
-	 */
 
 	private class TablePanel extends JPanel {
 		public TablePanel() {
