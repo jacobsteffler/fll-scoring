@@ -39,7 +39,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 		setLayout(null);
 		setPreferredSize(new Dimension(1024, 768));
 
-		topPanel = new TablePanel();
+		topPanel = new NimbusPanel();
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.LINE_AXIS));
 		topPanel.setBounds(0, 0, 1024, 200);
 		add(topPanel);
@@ -138,8 +138,8 @@ public class ClientPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	private class TablePanel extends JPanel {
-		public TablePanel() {
+	private class NimbusPanel extends JPanel {
+		public NimbusPanel() {
 			setBorder(null);
 		}
 
