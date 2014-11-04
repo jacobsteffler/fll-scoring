@@ -1,0 +1,32 @@
+1071::Blue Thunder Robotics::0::0::0::0
+2018::ROBO BUILDERS::0::0::0::0
+2083::Eagle 1::0::0::0::0
+2979::RoboShamrocks II::0::0::0::0
+3200::BHMS Zupancic::0::0::0::0
+3548::Exposed Exploding Electrons::0::0::0::0
+3549::Connected Cubs::0::0::0::0
+3643::BHMS Madlambayan::0::0::0::0
+3648::Tech Twisters::0::0::0::0
+4182::Techno Tadpoles::0::0::0::0
+4376::Robo Shamrocks I::0::0::0::0
+4414::Monster Moustaches::0::0::0::0
+4775::Happi Limes::0::0::0::0
+5454::M Go Blue Bots::0::0::0::0
+5557::Flaming Fighters::0::0::0::0
+6006::Novi Autobots::0::0::0::0
+6641::Dynamic Robocatz::0::0::0::0
+7463::The Baguettes::0::0::0::0
+7781::Yolo Robos::0::0::0::0
+7968::THUNDERBOTS::0::0::0::0
+8021::Novo Bots::0::0::0::0
+8465::Technowiz::0::0::0::0
+9713::TondaTechnos::0::0::0::0
+9799::circuit breakers::0::0::0::0
+11312::Eagles::0::0::0::0
+12955::Novi Stars::0::0::0::0
+13043::All Saints Robotics::0::0::0::0
+13652::Gallimore Roadrunners Gold Team::0::0::0::0
+13653::Gallimore Roadrunners Blue Team::0::0::0::0
+13674::Minecrafters::0::0::0::0
+13845::Super Bot Extreme::0::0::0::0
+13847::Team Caramel::0::0::0::0
