@@ -27,7 +27,7 @@ public class Client implements Runnable {
 
 	private List<Team> teams = new ArrayList<Team>();
 	private String event;
-	
+
 	private boolean fs = false;
 
 	public void run() {
@@ -37,7 +37,7 @@ public class Client implements Runnable {
 
 		cp = new ClientPanel();
 		frame.setContentPane(cp);
-		
+
 		cp.getInputMap().put(KeyStroke.getKeyStroke('f'), "toggleFS");
 		cp.getActionMap().put("toggleFS", new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
@@ -49,13 +49,31 @@ public class Client implements Runnable {
 			}
 		});
 
+		cp.getInputMap().put(KeyStroke.getKeyStroke('t'), "setTime");
+		cp.getActionMap().put("setTime", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							String response = JOptionPane
+									.showInputDialog("Enter new delay in seconds:");
+							int delay = Integer.parseInt(response);
+							delay = Math.abs(delay);
+							cp.setDelay(delay);
+						} catch (NumberFormatException e) {
+						}
+					}
+				});
+			}
+		});
+
 		frame.pack();
 		frame.setVisible(true);
 	}
 
 	public Client(String event) {
 		this.event = event;
-		
+
 		try {
 			SwingUtilities.invokeAndWait(this);
 		} catch (InvocationTargetException e) {
@@ -90,28 +108,28 @@ public class Client implements Runnable {
 			}
 		});
 	}
-	
+
 	private void toggleFS() {
 		fs = !fs;
-		
-		if(fs) {
-            frame.dispose();
-            frame.setUndecorated(true);
-            if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
-                frame.setVisible(true);
-                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            } else { // OS X, Linux, etc.
-                frame.getGraphicsConfiguration().getDevice()
-                        .setFullScreenWindow(frame);
-            }
-        } else { // Set Windowed
-            frame.dispose();
-            frame.setUndecorated(false);
-            frame.setExtendedState(JFrame.NORMAL);
-            frame.pack();
-            frame.setVisible(true);
-            frame.invalidate();
-        }
+
+		if (fs) {
+			frame.dispose();
+			frame.setUndecorated(true);
+			if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+				frame.setVisible(true);
+				frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			} else { // OS X, Linux, etc.
+				frame.getGraphicsConfiguration().getDevice()
+						.setFullScreenWindow(frame);
+			}
+		} else { // Set Windowed
+			frame.dispose();
+			frame.setUndecorated(false);
+			frame.setExtendedState(JFrame.NORMAL);
+			frame.pack();
+			frame.setVisible(true);
+			frame.invalidate();
+		}
 	}
 
 	public static void main(String[] args) {

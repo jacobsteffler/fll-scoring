@@ -97,6 +97,10 @@ public class ClientPanel extends JPanel implements ActionListener {
 				1024, 500));
 	}
 
+	public void setDelay(int delay) {
+		tableTimer.setDelay(delay * 1000);
+	}
+	
 	public void setTeams(Team[] teams) {
 		int total = (int) (10 * Math.ceil(teams.length / 10.0));
 		if (total == 0)
