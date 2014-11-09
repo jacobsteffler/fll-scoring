@@ -99,6 +99,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 
 	public void setDelay(int delay) {
 		tableTimer.setDelay(delay * 1000);
+		tableTimer.restart();
 	}
 	
 	public void setTeams(Team[] teams) {
