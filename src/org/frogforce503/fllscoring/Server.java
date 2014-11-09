@@ -315,7 +315,7 @@ public class Server implements Runnable, ActionListener {
 					populateCB();
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(frame,
-							"Suha, you're an idiot. The file could not be found.", "File Not Found",
+							"Suhas, you're an idiot. The file could not be found.", "File Not Found",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
