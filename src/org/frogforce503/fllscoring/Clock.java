@@ -14,7 +14,8 @@ public class Clock extends JLabel implements ActionListener {
 
 	public Clock() {
 		format = new SimpleDateFormat("h:mm a");
-
+		setText(format.format(new Date()));
+		
 		new Timer(500, this).start();
 	}
 

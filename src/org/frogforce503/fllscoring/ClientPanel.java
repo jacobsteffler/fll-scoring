@@ -84,6 +84,8 @@ public class ClientPanel extends JPanel implements ActionListener {
 		tablePane.setBorder(null);
 		tablePane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		tablePane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tablePane.setBounds(0, 200, 1024, 568);
 		add(tablePane);
 
@@ -101,7 +103,7 @@ public class ClientPanel extends JPanel implements ActionListener {
 		tableTimer.setDelay(delay * 1000);
 		tableTimer.restart();
 	}
-	
+
 	public void setTeams(Team[] teams) {
 		int total = (int) (10 * Math.ceil(teams.length / 10.0));
 		if (total == 0)
