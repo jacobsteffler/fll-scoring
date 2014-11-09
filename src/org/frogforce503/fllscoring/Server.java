@@ -82,7 +82,7 @@ public class Server implements Runnable, ActionListener {
 		String event = JOptionPane
 				.showInputDialog(
 						null,
-						"Enter a name for this event.\n(Must be exactly the same for server and all clients.)",
+						"Suhas, enter a name for this event.\n(Must be exactly the same for server and all clients.)",
 						"Event Name", JOptionPane.QUESTION_MESSAGE);
 
 		if (event != null) {
@@ -119,6 +119,7 @@ public class Server implements Runnable, ActionListener {
 		save = new JButton(saveIcon);
 		save.setToolTipText("Save scores");
 		save.addActionListener(this);
+		save.setEnabled(false);
 		tb.add(save);
 		tb.add(Box.createHorizontalGlue());
 
@@ -127,6 +128,7 @@ public class Server implements Runnable, ActionListener {
 		rankings = new JButton(starIcon);
 		rankings.setToolTipText("View rankings");
 		rankings.addActionListener(this);
+		rankings.setEnabled(false);
 		tb.add(rankings);
 		tb.add(Box.createHorizontalGlue());
 
@@ -142,6 +144,7 @@ public class Server implements Runnable, ActionListener {
 		chooser.setLayout(new BoxLayout(chooser, BoxLayout.PAGE_AXIS));
 		cb = new JComboBox<Team>();
 		cb.addActionListener(this);
+		cb.setEnabled(false);
 		chooser.add(Box.createVerticalStrut(5));
 		chooser.add(cb);
 		chooser.add(Box.createVerticalStrut(5));
@@ -155,24 +158,28 @@ public class Server implements Runnable, ActionListener {
 		input.add(new JLabel("R1: "));
 		r1 = new JTextField(3);
 		r1.addActionListener(this);
+		r1.setEnabled(false);
 		input.add(r1);
 		input.add(Box.createHorizontalStrut(5));
 
 		input.add(new JLabel("R2: "));
 		r2 = new JTextField(3);
 		r2.addActionListener(this);
+		r2.setEnabled(false);
 		input.add(r2);
 		input.add(Box.createHorizontalStrut(5));
 
 		input.add(new JLabel("R3: "));
 		r3 = new JTextField(3);
 		r3.addActionListener(this);
+		r3.setEnabled(false);
 		input.add(r3);
 		input.add(Box.createHorizontalStrut(5));
 
 		input.add(new JLabel("R4: "));
 		r4 = new JTextField(3);
 		r4.addActionListener(this);
+		r4.setEnabled(false);
 		input.add(r4);
 		input.add(Box.createHorizontalStrut(5));
 
@@ -190,6 +197,7 @@ public class Server implements Runnable, ActionListener {
 
 		accept = new JButton("Accept");
 		accept.addActionListener(this);
+		accept.setEnabled(false);
 		input.add(accept);
 
 		fc.setFileFilter(new FileNameExtensionFilter(
@@ -248,15 +256,35 @@ public class Server implements Runnable, ActionListener {
 								.parseInt(info[5])));
 
 				teams.add(team);
-				System.out.println("Team added: " + team);
+				System.out.println("Suhas, a team was added: " + team);
 			} catch (Exception e) {
-				System.out.println("Problem parsing line " + line
-						+ ", skipping.");
+				System.out.println("God dammit, Suhas. Skipping line " + line
+						+ ".");
 			} finally {
 				line++;
 			}
 		}
 
+		if(teams.size() > 0) {
+			save.setEnabled(true);
+			rankings.setEnabled(true);
+			accept.setEnabled(true);
+			cb.setEnabled(true);
+			r1.setEnabled(true);
+			r2.setEnabled(true);
+			r3.setEnabled(true);
+			r4.setEnabled(true);
+		} else {
+			save.setEnabled(false);
+			rankings.setEnabled(false);
+			accept.setEnabled(false);
+			cb.setEnabled(false);
+			r1.setEnabled(false);
+			r2.setEnabled(false);
+			r3.setEnabled(false);
+			r4.setEnabled(false);
+		}
+		
 		scan.close();
 	}
 
@@ -287,7 +315,7 @@ public class Server implements Runnable, ActionListener {
 					populateCB();
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(frame,
-							"The file could not be found.", "File Not Found",
+							"Suha, you're an idiot. The file could not be found.", "File Not Found",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -297,7 +325,7 @@ public class Server implements Runnable, ActionListener {
 					saveFile(fc.getSelectedFile());
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame,
-							"The file could not be opened.", "IO Error",
+							"Suhas, you're a butt. The file could not be opened.", "IO Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -383,7 +411,7 @@ public class Server implements Runnable, ActionListener {
 					int response = JOptionPane
 							.showConfirmDialog(
 									parent,
-									"The file "
+									"Suhas!! The file "
 											+ selectedFile.getName()
 											+ " already exists. Do you want to replace the existing file?",
 									"Overwrite file?",
@@ -409,7 +437,7 @@ public class Server implements Runnable, ActionListener {
 			int choice = JOptionPane
 					.showConfirmDialog(
 							parent,
-							"Are you sure you want to exit? Unsaved scores will be lost.",
+							"Suhas, are you sure you want to exit? Unsaved scores will be lost.",
 							"Exit?", JOptionPane.YES_NO_OPTION);
 			if (choice == JOptionPane.YES_OPTION)
 				System.exit(0);
