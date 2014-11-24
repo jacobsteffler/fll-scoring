@@ -82,7 +82,7 @@ public class Server implements Runnable, ActionListener {
 		String event = JOptionPane
 				.showInputDialog(
 						null,
-						"Suhas, enter a name for this event.\n(Must be exactly the same for server and all clients.)",
+						"Please enter a name for this event.\n(Must be exactly the same for server and all clients.)",
 						"Event Name", JOptionPane.QUESTION_MESSAGE);
 
 		if (event != null) {
@@ -256,10 +256,10 @@ public class Server implements Runnable, ActionListener {
 								.parseInt(info[5])));
 
 				teams.add(team);
-				System.out.println("Suhas, a team was added: " + team);
+				System.out.println("Team added: " + team);
 			} catch (Exception e) {
-				System.out.println("God dammit, Suhas. Skipping line " + line
-						+ ".");
+				System.out.println("Error on  line " + line
+						+ ", skipping.");
 			} finally {
 				line++;
 			}
@@ -315,7 +315,7 @@ public class Server implements Runnable, ActionListener {
 					populateCB();
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(frame,
-							"Suhas, you're an idiot. The file could not be found.", "File Not Found",
+							"The file could not be found.", "File Not Found",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -325,7 +325,7 @@ public class Server implements Runnable, ActionListener {
 					saveFile(fc.getSelectedFile());
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(frame,
-							"Suhas, you're a butt. The file could not be opened.", "IO Error",
+							"The file could not be opened.", "IO Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -411,7 +411,7 @@ public class Server implements Runnable, ActionListener {
 					int response = JOptionPane
 							.showConfirmDialog(
 									parent,
-									"Suhas!! The file "
+									"The file "
 											+ selectedFile.getName()
 											+ " already exists. Do you want to replace the existing file?",
 									"Overwrite file?",
@@ -437,7 +437,7 @@ public class Server implements Runnable, ActionListener {
 			int choice = JOptionPane
 					.showConfirmDialog(
 							parent,
-							"Suhas, are you sure you want to exit? Unsaved scores will be lost.",
+							"Are you sure you want to exit? Unsaved scores will be lost.",
 							"Exit?", JOptionPane.YES_NO_OPTION);
 			if (choice == JOptionPane.YES_OPTION)
 				System.exit(0);

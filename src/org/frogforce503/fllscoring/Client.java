@@ -56,7 +56,7 @@ public class Client implements Runnable {
 					public void run() {
 						try {
 							String response = JOptionPane
-									.showInputDialog("Suhas, enter new delay in seconds:");
+									.showInputDialog("Please enter new delay in seconds:");
 							int delay = Integer.parseInt(response);
 							delay = Math.abs(delay);
 							cp.setDelay(delay);
@@ -156,7 +156,7 @@ public class Client implements Runnable {
 		String event = JOptionPane
 				.showInputDialog(
 						null,
-						"Suhas, enter a name for this event.\n(Must be exactly the same for server and all clients.)",
+						"Please enter a name for this event.\n(Must be exactly the same for server and all clients.)",
 						"Event Name", JOptionPane.QUESTION_MESSAGE);
 
 		if (event != null) {
