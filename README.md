@@ -1,4 +1,4 @@
-fll-scoring
+FLL Scorekeeping Software
 ===========
 Copyright 2014 Jacob Steffler
 
